@@ -1,6 +1,12 @@
-<?
+<?php
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
-   die();
+	die();
+
+/*
+ *  Параметры 
+ */
+
+$APPLICATION->AddHeadScript("http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU", true);
 
 	if(!CModule::IncludeModule("iblock")){
 		return;

@@ -3,6 +3,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
    die(); 
 ?>
 
+
 <div class="search-panel clearfix">
 	<h2><?$APPLICATION->ShowTitle()?></h2>
 	<ul class="search-panel-nav clearfix">
@@ -44,7 +45,14 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
 			<label>Место аварии:</label>
 			<p>Отметьте на мето ДТП на карте самостоятельно, либо нажмите кнопку автоопределения Вашего нахождения</p>
 			<p><button class="btn-sm-pink btn-locate" title="Автоопределение вашего текущего положения">Автоопределение</button></p>
-			<div class="form-section-map">map</div>
+			<div class="form-section-map" id="YMapsID"></div>
+		    </div>
+		    <div class="col-xs-12">
+			<label>Адрес происшествия:</label>
+			<div class="form-group has-error">
+			    <input type="text" id="adress" class="form-control" placeholder="Адрес происшествия">
+			    <span class="error-badge">&times;</span>
+			</div>
 		    </div>
 		    <div class="col-xs-12">
 			<label>Заголовок:</label>
@@ -94,7 +102,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
 	</div>
 </div>
 
-
+<?php return;?>
 
 
 <div class="content animate-panel">
@@ -196,7 +204,7 @@ var myMap;
 
 // Дождёмся загрузки API и готовности DOM.
 ymaps.ready(init);
-function init() {
+function init() 
     var myPlacemark;
 
 	var myMap = new ymaps.Map('map', {

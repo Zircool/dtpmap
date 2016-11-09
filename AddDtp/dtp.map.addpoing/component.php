@@ -6,7 +6,9 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
  *  Параметры 
  */
 
-$APPLICATION->AddHeadScript("//api-maps.yandex.ru/2.0/?load=package.full&lang=ru-RU", true);
+$APPLICATION->AddHeadScript("//api-maps.yandex.ru/2.1/?load=package.full&lang=ru-RU", true);
+$APPLICATION->AddHeadScript("/bitrix/templates/dtpmap/js/dropzone.js", true);
+$APPLICATION->SetAdditionalCSS("/bitrix/templates/dtpmap/css/dropzone.css");
 
  
 if(!CModule::IncludeModule("iblock")){

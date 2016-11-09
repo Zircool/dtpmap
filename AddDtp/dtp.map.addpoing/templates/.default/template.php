@@ -18,58 +18,60 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
 	</div>
 	<div class="row">
 	<div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-	    <form>
+		<input type="hidden" id="lng" value="<?=$arResult['LNG']?>">
+		<input type="hidden" id="lat" value="<?=$arResult['LAT']?>">
 		<div class="row">
-		    <div class="col-xs-12 col-sm-6 col-md-3">
-			<label>Дата аварии:</label>
-			<div class="form-group">
-			    <div class="search-date">
-				<input type="text" id="search-date-start" class="form-control datepicker" placeholder="Начало">
-				<button class="seach-date-toggle"><span></span><span></span><span></span></button>
-			    </div>
+			<div class="col-xs-12 col-sm-6 col-md-3">
+				<label>Дата аварии:</label>
+				<div class="form-group">
+					<div class="search-date">
+						<input type="text" id="search-date-start" class="form-control datepicker" placeholder="Начало">
+						<button class="seach-date-toggle"><span></span><span></span><span></span></button>
+					</div>
+				</div>
 			</div>
-		    </div>
-		    <div class="col-xs-12 col-sm-6 col-md-5">
-			<label for="">Тип ДТП:</label>
-			<div class="form-group">
-			    <select name="crash-type" id="crash-type" class="form-control"  data-jcf='{"wrapNative": false, "wrapNativeOnMobile": false, "fakeDropInBody": false, "useCustomScroll": false}'>
-				<option value="0">Выберите тип ДТП</option>
-				<?foreach($arResult['SECTIONS'] as $sid=>$sname):?>
-					<option value="<?=$sid?>"><?=$sname?></option>
-				<?endforeach;?>
-				
-			    </select>
+			<div class="col-xs-12 col-sm-6 col-md-5">
+				<label for="">Тип ДТП:</label>
+				<div class="form-group">
+					<select name="crash-type" id="crash-type" class="form-control"  data-jcf='{"wrapNative": false, "wrapNativeOnMobile": false, "fakeDropInBody": false, "useCustomScroll": false}'>
+						<option value="0">Выберите тип ДТП</option>
+							<?foreach($arResult['SECTIONS'] as $sid=>$sname):?>
+								<option value="<?=$sid?>"><?=$sname?></option>
+							<?endforeach;?>	
+					</select>
+				</div>
 			</div>
-		    </div>
-		    <div class="col-xs-12">
-			<label>Место аварии:</label>
-			<p>Отметьте на мето ДТП на карте самостоятельно, либо нажмите кнопку автоопределения Вашего нахождения</p>
-			<p><button class="btn-sm-pink btn-locate" title="Автоопределение вашего текущего положения">Автоопределение</button></p>
-			<div class="form-section-map" id="YMapsID"></div>
-		    </div>
-		    <div class="col-xs-12">
-			<label>Адрес происшествия:</label>
-			<div class="form-group has-error">
-			    <input type="text" id="adress" class="form-control" placeholder="Адрес происшествия">
-			    <span class="error-badge">&times;</span>
+			<div class="col-xs-12">
+				<label>Место аварии:</label>
+				<p>Отметьте на мето ДТП на карте самостоятельно, либо нажмите кнопку автоопределения Вашего нахождения</p>
+<!--					<p><button onclick="GetPosition();" class="btn-sm-pink btn-locate" title="Автоопределение вашего текущего положения">Автоопределение</button></p>-->
+				<div class="form-section-map" id="YMapsID"></div>
 			</div>
-		    </div>
-		    <div class="col-xs-12">
-			<label>Заголовок:</label>
-			<div class="form-group has-error">
-			    <input type="text" class="form-control" placeholder="Напишите заголовок, отражающий суть ДТП">
-			    <span class="error-badge">&times;</span>
+			<div class="col-xs-12">
+				<label>Адрес происшествия:</label>
+				<div class="form-group">
+					<input type="text" id="adress" class="form-control" placeholder="Адрес происшествия">
+				</div>
 			</div>
-		    </div>
-		    <div class="col-xs-12">
-			<label>Полное описание:</label>
-			<div class="form-group">
-			    <textarea class="form-control" cols="30" rows="10" placeholder="Пожалуйста, опишите подробнее детали ДПТ"></textarea>
+			<div class="col-xs-12">
+				<label>Заголовок:</label>
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Напишите заголовок, отражающий суть ДТП">
+				</div>
 			</div>
-		    </div>
-		    <div class="col-xs-12">
-			<label>Фото:</label>
-		    </div>
+			<div class="col-xs-12">
+				<label>Полное описание:</label>
+				<div class="form-group">
+					<textarea class="form-control" cols="30" rows="10" placeholder="Пожалуйста, опишите подробнее детали ДПТ"></textarea>
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<form action="/tmp" method="post" class="dropzone" id="my-awesome-dropzone">
+					<div class="fallback">
+						<input name="file" type="file" />
+					</div>
+				</form>
+			</div>
 		    <div class="col-xs-12">
 			<label>Видео:</label>
 		    </div>
@@ -97,7 +99,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
 			</p>
 		    </div>
 		</div>
-	    </form>
+
 	</div>
 	</div>
 </div>

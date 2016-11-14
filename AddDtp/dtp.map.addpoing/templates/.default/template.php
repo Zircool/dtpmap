@@ -25,7 +25,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
 				<label>Дата аварии:</label>
 				<div class="form-group">
 					<div class="search-date">
-						<input type="text" id="search-date-start" class="form-control datepicker" placeholder="Начало">
+						<input type="text" id="search-date-start" class="form-control datepicker" required="required" placeholder="Начало">
 						<button class="seach-date-toggle"><span></span><span></span><span></span></button>
 					</div>
 				</div>
@@ -56,53 +56,77 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
 			<div class="col-xs-12">
 				<label>Заголовок:</label>
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Напишите заголовок, отражающий суть ДТП">
+					<input type="text" class="form-control"  id="name" placeholder="Напишите заголовок, отражающий суть ДТП">
 				</div>
 			</div>
 			<div class="col-xs-12">
 				<label>Полное описание:</label>
 				<div class="form-group">
-					<textarea class="form-control" cols="30" rows="10" placeholder="Пожалуйста, опишите подробнее детали ДПТ"></textarea>
+					<textarea class="form-control" cols="30" id="detail" rows="10" placeholder="Пожалуйста, опишите подробнее детали ДПТ"></textarea>
 				</div>
 			</div>
 			<div class="col-xs-12">
-				<form action="/tmp" method="post" class="dropzone" id="my-awesome-dropzone">
-					<div class="fallback">
-						<input name="file" type="file" />
-					</div>
-				</form>
+				<?$APPLICATION->IncludeComponent("bitrix:main.file.input", "drag_n_drop_add",
+					array(
+						"INPUT_NAME"=>"FILE_AND_VIDEO",
+						"MULTIPLE"=>"Y",
+						"MODULE_ID"=>"dtpmap",
+						"MAX_FILE_SIZE"=>"",
+						"ALLOW_UPLOAD"=>"A", 
+						"ALLOW_UPLOAD_EXT"=>""
+					),
+					false
+					);?>
 			</div>
-		    <div class="col-xs-12">
-			<label>Видео:</label>
-		    </div>
-		    <div class="col-xs-12">
-			<label>Теги:</label>
-			<div class="form-group">
-			    <input type="text" class="form-control" placeholder="Напишите заголовок, отражающий суть ДТП">
+			<div class="col-xs-12">
+				<label>Добавить видео по ссылке:</label>
+				<div class="form-group">
+					<input type="text"  id="video_link" class="form-control">
+				</div>
 			</div>
-		    </div>
-		    <div class="col-xs-12">
-			<label>Добавить видео по ссылке:</label>
-			<div class="form-group">
-			    <input type="text" class="form-control">
+			<div class="col-xs-12">
+				<label>Теги: <small>через запятую</small></label>
+				<div class="form-group">
+					<input type="text" id="tags" class="form-control"  data-role="tagsinput" placeholder="">
+				</div>
 			</div>
-		    </div>
-		    <div class="col-xs-12">
-			<label>Ссылка на источник <small>Пожалуйста, разместите ссылку на источник, если материал взят с другого сайта</small></label>
-			<div class="form-group">
-			    <input type="text" class="form-control">
+
+			<div class="col-xs-12">
+				<label>Ссылка на источник: <small>Пожалуйста, разместите ссылку на источник, если материал взят с другого сайта</small></label>
+				<div class="form-group">
+					<input type="text" id ="link" class="form-control">
+				</div>
 			</div>
-		    </div>
-		    <div class="col-xs-12">
-			<p>
-			    <button type="submit" class="btn-md-pink">Добавить ДТП</button>
-			</p>
-		    </div>
+			<div class="col-xs-12">
+				<p>
+				    <button type="submit" onclick="AddDtp();" class="btn-md-pink">Добавить ДТП</button>
+				</p>
+			</div>
 		</div>
 
 	</div>
 	</div>
 </div>
+
+<!-- Form fill error modal -->
+<div class="modal form-error-modal fade" id="formErrorModal" tabindex="-1" role="dialog" aria-labelledby="formErrorModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close" title="Закрыть окно"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="formErrorModalLabel">Не все поля заполнены</h4>
+			</div>
+			<div class="modal-body" id="modal-body-err">
+				<p>Вы заполнили не все поля в форме добавления ДТП.</p>
+				<p id="err-field"></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn-md-pink" id="err-but" data-dismiss="modal">Исправить</button>
+			 </div>
+		</div>
+	</div>
+</div>
+
 
 <?php return;?>
 

@@ -2,13 +2,11 @@
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
 	die();
 
-/*
- *  Параметры 
- */
+CJSCore::Init(array('ajax'));
 
 $APPLICATION->AddHeadScript("//api-maps.yandex.ru/2.1/?load=package.full&lang=ru-RU", true);
-$APPLICATION->AddHeadScript("/bitrix/templates/dtpmap/js/dropzone.js", true);
-$APPLICATION->SetAdditionalCSS("/bitrix/templates/dtpmap/css/dropzone.css");
+$APPLICATION->AddHeadScript("/bitrix/templates/dtpmap/js/bootstrap-tagsinput.min.js", true);
+$APPLICATION->SetAdditionalCSS("/bitrix/templates/dtpmap/css/bootstrap-tagsinput.css");
 
  
 if(!CModule::IncludeModule("iblock")){

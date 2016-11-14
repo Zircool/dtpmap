@@ -1,43 +1,115 @@
 $(document).ready(function() {	
 	$('#datepicker').datepicker();
-	Dropzone.options.myAwesomeDropzone = {
-		maxFilesize: 5,
-		addRemoveLinks: true,
-		dictResponseError: 'Server not Configured',
-		acceptedFiles: ".png,.jpg,.gif,.bmp,.jpeg",
-		dictDefaultMessage:"Фото и видео материалы",
-		init: function () {
-			var self = this;
-			// config
-			self.options.addRemoveLinks = true;
-			self.options.dictRemoveFile = "Удалить";
-			//New file added
-			self.on("addedfile", function (file) {
-				console.log('new file added ', file);
-			});
-			// Send file starts
-			self.on("sending", function (file) {
-				console.log('upload started', file);
-				$('.meter').show();
-			});
-
-			// File upload Progress
-			self.on("totaluploadprogress", function (progress) {
-				console.log("progress ", progress);
-				$('.roller').width(progress + '%');
-			});
-
-			self.on("queuecomplete", function (progress) {
-				$('.meter').delay(999).slideUp(999);
-			});
-
-			// On removing file
-			self.on("removedfile", function (file) {
-				console.log(file);
-			});
-		}
-	};
 })
+
+
+
+
+BX.ready(function(){
+
+});
+
+/*
+ * Сохраняем ДТП
+ */
+function AddDtp(){
+	BX.showWait();
+	var errors = [];
+	var imgs = [];
+	var error = "";
+	var fields =  BX.findChild(BX("file-selectdialog-"+BX("uid-input").value), {
+				'tag': 'input',
+				'type': 'hidden'
+			},
+			true,
+			true
+	);
+	
+	fields.forEach(function(element){
+		if(element.value != ""){
+			imgs.push(element.value)
+		}
+	});
+	
+	
+	postData = {
+		'sessid': BX.bitrix_sessid(),
+		'date': BX('search-date-start').value,
+		'lat':BX('lat').value,
+		'lng':BX('lng').value,
+		'type':BX('crash-type').value,
+		'adress':BX('adress').value,
+		'name':BX('name').value,
+		'detail':BX('detail').value,
+		'video_link':BX('video_link').value,
+		'tags':$('#tags').val(),
+		'link':BX('link').value,
+		'imgs':imgs,
+	};
+	
+	if(postData.type == 0){
+		errors.push('Выберите тип происшествия.');
+	}
+	
+	if(postData.adress == ""){
+		errors.push('Заполните адрес.');
+	}
+	
+	if(postData.name == ""){
+		errors.push('Укажите заголовок.');
+	}
+	
+	
+	if(errors.length != 0){
+		
+		errors.forEach(function(er){
+			error = error + er+"</br>"; 
+		});
+		yaCounter40888589.reachGoal('ADD_DTP_ERROR');
+		debugger;
+		$('#err-field').html(error);
+		$('#formErrorModal').modal();
+		return;
+	}
+	
+	
+	BX.ajax({
+		url: '/ajax/add.php',
+		method: 'POST',
+		data: postData,
+		dataType: 'json',
+		timeout: 30,
+		onsuccess: function(result){
+			BX.closeWait();
+			if(result.ERROR){
+				yaCounter40888589.reachGoal('ADD_DTP_ERROR');
+				result.ERRORS.forEach(function(er){
+					error = error + er+"</br>"; 
+				});
+				$('#err-field').html(error);
+				$('#formErrorModal').modal();
+				return;
+			}else{
+				yaCounter40888589.reachGoal('ADD_DTP_COMPLETE');
+				$('#formErrorModalLabel').text('Успешно');
+				$('#modal-body-err').html('<p>Информация о ДТП успешно добавлена.</p>');
+				$('#err-but').text('Перейти к записи');
+				$('#formErrorModal').modal();
+			}
+		},
+		onfailure:function(er){
+			BX.closeWait();
+			yaCounter40888589.reachGoal('ADD_DTP_ERROR');
+			$('#formErrorModalLabel').text('Ошибка');
+			$('#modal-body-err').html('<p>На сервере произошла ошибка. Пожалуйста повторите попытку позже.</p>');
+			$('#err-but').text('Закрыть');
+			$('#formErrorModal').modal();
+			
+		},
+	});
+}
+
+
 
 
 
@@ -55,7 +127,7 @@ function init(){
 	// Сравним положение, вычисленное по ip пользователя и
 	// положение, вычисленное средствами браузера.
 	geolocation.get({
-		provider: 'yandex',
+		provider: 'auto',
 		mapStateAutoApply: true
 	}).then(function (result) {
 		// Красным цветом пометим положение, вычисленное через ip.
@@ -70,6 +142,9 @@ function init(){
 		myMap.setCenter(result.geoObjects.position);
 		myMap.setZoom(18);
 		getAddress(result.geoObjects.position);
+		
+		$("#lat").val(result.geoObjects.position[0]);
+		$("#lng").val(result.geoObjects.position[1]);
 	});
 
 
@@ -81,6 +156,7 @@ function init(){
 		//Задаем координаты
 		$("#lat").val(coords[0]);
 		$("#lng").val(coords[1]);
+
 
 		// Если метка уже создана – просто передвигаем ее
 		if (myPlacemark) {
@@ -113,6 +189,9 @@ function init(){
 		myPlacemark.properties.set('iconContent', 'Поиск...');
 		ymaps.geocode(coords).then(function (res) {
 			var firstGeoObject = res.geoObjects.get(0);
+			if($('#name').val() == ""){
+				$('#name').val("ДТП "+firstGeoObject.properties.get('name'));
+			}
 			$("#adress").val(firstGeoObject.properties.get('text'));
 			myPlacemark.properties
 					.set({

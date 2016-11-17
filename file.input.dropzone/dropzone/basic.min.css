@@ -1,0 +1,30 @@
+.dropzone {
+    min-height: 300px;
+    border: 1px dashed rgba(0,0,0,.3);
+    border-radius: 2px;
+    background: #fff;
+    padding: 20px;
+}
+.dropzone {
+    background-image: -webkit-gradient(linear,left top,right bottom,color-stop(0.25,rgba(0,0,0,.03)),color-stop(0.25,transparent),color-stop(0.5,transparent),color-stop(0.5,rgba(0,0,0,.03)),color-stop(0.75,rgba(0,0,0,.03)),color-stop(0.75,transparent),to(transparent));
+    background-image: -webkit-linear-gradient(135deg,rgba(0,0,0,.03)25%,transparent 25%,transparent 50%,rgba(0,0,0,.03)50%,rgba(0,0,0,.03)75%,transparent 75%,transparent);
+    background-image: -moz-linear-gradient(135deg,rgba(0,0,0,.03)25%,transparent 25%,transparent 50%,rgba(0,0,0,.03)50%,rgba(0,0,0,.03)75%,transparent 75%,transparent);
+    background-image: -ms-linear-gradient(135deg,rgba(0,0,0,.03)25%,transparent 25%,transparent 50%,rgba(0,0,0,.03)50%,rgba(0,0,0,.03)75%,transparent 75%,transparent);
+    background-image: -o-linear-gradient(135deg,rgba(0,0,0,.03)25%,transparent 25%,transparent 50%,rgba(0,0,0,.03)50%,rgba(0,0,0,.03)75%,transparent 75%,transparent);
+    background-image: linear-gradient(135deg,rgba(0,0,0,.03)25%,transparent 25%,transparent 50%,rgba(0,0,0,.03)50%,rgba(0,0,0,.03)75%,transparent 75%,transparent);
+    background-color: #FAFCFD;
+    background-size: 16px 16px;
+}
+
+.dropzone:before{
+    content: ' ';
+    background: url(http://infostart.ru/bitrix/templates/adaptive/js_component/dropzone/images/drop_area.png) no-repeat center center;
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.dropzone-single:before{
+    background: url(http://infostart.ru/bitrix/templates/adaptive/js_component/dropzone/images/drop_area_small.png) no-repeat center center;
+}

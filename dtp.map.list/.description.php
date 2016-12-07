@@ -1,20 +1,20 @@
-<?
+<?php
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 
 $arComponentDescription = array(
-	"NAME" => "Ñïèñîê job",
-	"DESCRIPTION" => "Ñïèñîê job",
+	"NAME" => "dtp.list",
+	"DESCRIPTION" => "Ð¡Ð¿Ð¸ÑÐ¾Ðº Ð”Ð¢ÐŸ",
 	"ICON" => "/images/icon.gif",
 	"SORT" => 10,
 	"CACHE_PATH" => "Y",
 	"PATH" => array(
-		"ID" => "job", // for example "my_project"
+		"ID" => "dtp", // for example "my_project"
 		/*"CHILD" => array(
 			"ID" => "", // for example "my_project:services"
 			"NAME" => "",  // for example "Services"
 		),*/
 	),
-	"COMPLEX" => "N",
+	"COMPLEX" => "N", 
 );
 
-?>
+?> 

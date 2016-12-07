@@ -1,1 +1,5 @@
-<?if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die(); ?>
+<?php
+$MESS ['T_NEWS_NEWS_NA'] = "Раздел не найден.";
+$MESS ['IBLOCK_MODULE_NOT_INSTALLED'] = "Модуль Информационных блоков не установлен";
+$MESS ['SEARCH_MODULE_NOT_INSTALLED'] = "Модуль Информационных блоков не установлен";
+?>

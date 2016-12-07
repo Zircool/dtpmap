@@ -1,2 +1,2 @@
 <?if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();?>
-<h2 class="red">Выберите шаблон</h2>
+<h2 class="red">Р”РѕР±Р°РІРёС‚СЊ Р”РўРџ</h2>

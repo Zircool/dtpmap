@@ -1,14 +1,14 @@
-<?
+<?php
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 
 $arComponentDescription = array(
-	"NAME" => "Коплексный компонент вывода",
-	"DESCRIPTION" => "Коплексный компонент вывода",
+	"NAME" => "dtp.complex",
+	"DESCRIPTION" => "РљРѕРјРїР»РµРєСЃРЅС‹Р№ РєРѕРјРїРѕРЅРµРЅС‚ Р”РўРџ",
 	"ICON" => "/images/icon.gif",
 	"SORT" => 10,
 	"CACHE_PATH" => "Y",
 	"PATH" => array(
-		"ID" => "job", // for example "my_project"
+		"ID" => "dtp", // for example "my_project"
 		/*"CHILD" => array(
 			"ID" => "", // for example "my_project:services"
 			"NAME" => "",  // for example "Services"

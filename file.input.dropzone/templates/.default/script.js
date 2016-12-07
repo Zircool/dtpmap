@@ -1,10 +1,13 @@
 $(document).ready(function() {	
 	Dropzone.options.myAwesomeDropzone = {
-		maxFilesize: 5,
+		maxFilesize: 10,
 		addRemoveLinks: true,
 		dictResponseError: 'Server not Configured',
-		acceptedFiles: ".png,.jpg,.gif,.bmp,.jpeg",
-		dictDefaultMessage:"Фото и видео материалы",
+		acceptedFiles: ".jpg,.bmp,.jpeg,.jpe,.gif,.png,.mp4",
+		dictDefaultMessage:"Перетащите сюда файлы или нажмите, что бы загрузить.",
+		dictCancelUpload:"Отменить загрузку",
+		dictCancelUploadConfirmation:"Вы действительно хотите прервать загрузку?",
+		dictInvalidFileType:"Запрещена загрузка файла данного типа.",
 		init: function () {
 			var self = this;
 			// config
@@ -63,8 +66,7 @@ $(document).ready(function() {
 				debugger;
 			});
 			self.on("complete", function (file) {
-				console.log(file);
-				debugger;
+				//console.log(file);
 			});
 		}
 	};

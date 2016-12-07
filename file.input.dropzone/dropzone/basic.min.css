@@ -1,5 +1,4 @@
 .dropzone {
-    min-height: 300px;
     border: 1px dashed rgba(0,0,0,.3);
     border-radius: 2px;
     background: #fff;
@@ -16,15 +15,8 @@
     background-size: 16px 16px;
 }
 
-.dropzone:before{
-    content: ' ';
-    background: url(http://infostart.ru/bitrix/templates/adaptive/js_component/dropzone/images/drop_area.png) no-repeat center center;
-    position: absolute;
-    top:0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+.dz-message span{
+	font-size:20px;
+	font-weight: 400;
 }
-.dropzone-single:before{
-    background: url(http://infostart.ru/bitrix/templates/adaptive/js_component/dropzone/images/drop_area_small.png) no-repeat center center;
-}
+
